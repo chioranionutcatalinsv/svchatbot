@@ -10,5 +10,4 @@ React/Nodejs Application
 .
 .
 .
-.
 #TEAM MEMBERS: 
