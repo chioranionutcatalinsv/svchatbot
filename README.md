@@ -1,14 +1,7 @@
-# svchatbot
-  Repo for callforcode hackathon
-# react/node.js project 
-
-#Stack and Arhitecture
-React/Nodejs Application
-.
-.
-#Tools
-.
-.
-.
-.
-#TEAM MEMBERS: 
+# Svchatbot Desciption
+  **Description**.
+  Repo containing solution for project.
+# Stack and Arhitecture
+   **React/Nodejs**.
+# Team Members
+  **Chioran Ionut Catalin**.
