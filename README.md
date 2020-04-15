@@ -1,5 +1,4 @@
-
-# Svchatbot Desciption
+# Svchatbot Description
   **Description**.
   Repo containing solution for project.
   
