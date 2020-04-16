@@ -5,7 +5,8 @@
   "author": "Ionut Chioran <ionut.chioran@softvision.ro>",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "ibm-watson": "^5.4.0"
   },
   "scripts": {
     "start": "node index.js",
