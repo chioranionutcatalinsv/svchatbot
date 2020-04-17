@@ -1,15 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment} from 'react';
+import {hot} from 'react-hot-loader/root';
+import './assets/css/style.css';
+import {Switch, Route} from 'react-router-dom';
+import {Home} from "./sections/Home";
+import {GlobalFonts} from './assets/fonts/fonts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       <h1>{'Hello world'}</h1>
-      </header>
-    </div>
-  );
-}
+const RouterSwitch = () => {
+    return (
+        <Switch>
+            <Route
+                exact path='/'
+                render={() => <Home />}
+            />
+        </Switch>
+    );
+};
 
-export default App;
+const App  = () => {
+    return (
+       <Fragment>
+           <GlobalFonts />
+           <RouterSwitch />
+       </Fragment>
+    );
+};
+
+
+
+export default hot(App);
