@@ -1,13 +1,99 @@
 import styled from 'styled-components';
 import {NavLink} from "react-router-dom";
 import {GithubSquare} from '@styled-icons/fa-brands/GithubSquare';
+import {Chat} from '@styled-icons/entypo/Chat'
+import {Robot} from '@styled-icons/remix-line/Robot';
+import {Health} from '@styled-icons/boxicons-regular/Health';
+import {InfoLargeOutline} from '@styled-icons/typicons/InfoLargeOutline';
 import svCogLogo from "../assets/logos/svCog.png";
 import chatbotLogo from "../assets/logos/botsv.svg";
+import {Jumbotron} from 'react-bootstrap';
 
-export const TalkToMeSignature = styled.p`
+export const mapPropsToFontSize = (props) => {
+  if(props.fontSize){
+      return `${props.fontSize}`
+  }
+  return `20px`;
+};
+
+
+const mapPropsToColor = (props) => {
+    if(props.color === 'purple'){
+        return '#B378EF';
+    }
+    if(props.color === 'white'){
+        return '#FFFFFF';
+    }
+
+    return '#0E0302'
+};
+
+export const CoolJumbotron = styled(Jumbotron)`
+  font-size: inherit;
+  font-family: inherit;
+  color: white;
+  background-color: white;
+  outline: none;
+  margin-bottom: 20px;
+  
+
+&:hover {
+  cursor: pointer;
+  animation: jelly 0.5s;
+}
+
+@keyframes jelly {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
+`;
+
+export const LiItem = styled.li`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const SignatureBox = styled.span`
+  position: relative;
+  margin-right: 20px;
+  &:before {
+ content: '';
+    position: absolute;
+    top: 60px;
+    left: 23%;
+    width: 130%;
+  height: 2px;
+  opacity: 0;
+  background-color: #B378EF;
+  transform-origin: center;
+  transform: translate(-50%, 0) scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+&:hover::before {
+  transform: translate(-50%, 0) scaleX(1);
+  opacity: 1;
+}
+`;
+
+export const TalkToMeTextSignature = styled.p`
    align-items: center;
    color: #B378EF;
-   font-size: 20px;
+   color:${mapPropsToColor};
+   font-size: ${mapPropsToFontSize};
    padding: 10px 20px 10px 10px;
    margin: 0;
 `;
@@ -18,15 +104,39 @@ export const BotLogo = styled.div`
     background-image: url(${chatbotLogo});
 	background-position:left;
 	background-repeat:no-repeat;
-	background-size:contain;
-    width: 30px;
-    height: 44px;
+	background-size: contain;
+    width: 70px;
+    height: 65px;
+`;
+
+export const AiRobotIcon = styled(Robot)`
+    color: black;
+    height: 60px;
+    weight: 60px;
+`;
+
+export const InfoIcon = styled(InfoLargeOutline)`
+    color: black;
+    height: 60px;
+    weight: 60px;
+`;
+
+export const ChatIcon = styled(Chat)`
+    color: black;
+    height: 60px;
+    weight: 60px;
+`;
+
+export const HealthIcon = styled(Health)`
+    color: black;
+    height: 60px;
+    weight: 60px;
 `;
 
 export const RobotIconToGitLink = styled(GithubSquare)`
-  color: white;
-  height: 40px;
-  padding-right: 50px;
+    color: white;
+    height: 67px;
+    padding: 10px;
 `;
 
 export const CogSvLogo = styled.div`
@@ -34,38 +144,46 @@ export const CogSvLogo = styled.div`
 	background-position:left;
 	background-repeat:no-repeat;
 	background-size:contain;
-    width: 125px;
-    height: 40px;
+    width: 140px;
+    height: 67px;
 `;
 
 export const StyledNavLinkExternal = styled.a`
   text-decoration: none;
   color: white;
-  align-items: center;
   padding: 10px 40px 10px 40px;
+  
+  &:hover{
+    text-decoration: none;
+    color: #B378EF;
+  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   color: white;
-  align-items: center;
   padding: 10px 40px 10px 40px;
+  
+  &:hover{
+    text-decoration: none;
+    color: #B378EF;
+  }
 `;
 
 export const LinkList = styled.ul`
     display:flex;
     flex-direction:row;
-    justify-content: flex-end;
-    align-content: space-around;
+    margin: 0;
 `;
+
 export const HeaderContainer = styled.header`
   display:flex;
+  z-index: 999999;
   flex-direction: row;
   justify-content: space-around;   /* first 3 lines 2 split right side and left side of header */
   position:fixed;
   top: 0;
   background-color: black;
-  opacity: 95%;
   width: 100%;
   font-family: 'Roboto', cursive !important ;
   -webkit-box-shadow: 0 8px 6px -6px black;
@@ -74,7 +192,15 @@ export const HeaderContainer = styled.header`
 `;
 
 export const Content  = styled.div`
-  margin-top: 90px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const Title = styled.p`
+    grid-column-start: 2
+    color: #B378EF;
+  
 `;
 
 
@@ -91,6 +217,10 @@ export const ModalStyledHook = styled.div`
 }
 
 .modal-main {
+  border-radius: 1px;
+  border-style: solid;
+  border-color: black;
+  padding: 10px;
   position:fixed;
   background: white;
   width: 60%;
@@ -99,16 +229,31 @@ export const ModalStyledHook = styled.div`
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
-  border: 2px solid rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-        -webkit-background-clip: padding-box;
-        -moz-background-clip: padding-box;
-        background-clip: padding-box;
 }
 
 .display-none {
   display: none;
 }
+`;
+
+export const ChatWrapperStyleHook = styled.div`   
+   p {
+      color: black;  
+    }
+    .rcw-close-button{
+        background-color: #B378EF;
+    }
+    .rcw-header {
+        background-color: #B378EF;
+    }
+    .rcw-launcher {
+        height: 80px;
+        width: 80px;
+        box-shadow: none !important;
+        background-color: #B378EF;
+    }
+    .rcw-conversation-container{
+        width: 100%;
+        
+    }
 `;
