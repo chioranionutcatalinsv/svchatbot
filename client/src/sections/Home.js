@@ -15,8 +15,9 @@ import {Modal} from "../components/Modal"
 /*import { ChatFeed, Message } from 'react-chat-ui'*/
 import {Row, Col, Container} from 'react-bootstrap';
 import botSvgIcon from '../assets/logos/botLogo.svg';
-import { Widget, addResponseMessage, addLinkSnippet, addUserMessage } from 'react-chat-widget';
+import { Widget, addResponseMessage} from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
+import axios from 'axios';
 
 const rowStyle = {
     borderRadius: '12px',
@@ -24,6 +25,10 @@ const rowStyle = {
     padding: '25px',
     borderStyle: 'solid',
     marginBottom: '5px',
+};
+
+export const assistantReply = async (text) => {
+    return axios.post(window.location.origin + `/api/ibm/textQuery/${text}`);
 };
 
 const presentationParagraphs = [
@@ -49,12 +54,12 @@ export const Home = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        addResponseMessage('Hello there');
+        addResponseMessage('Hello there!');
     }, []);
 
-    const handleNewUserMessage = (newMessage) => {
-        console.log(`New message incoming! ${newMessage}`);
-        // Now send the message throught the backend API
+    const handleNewUserMessage = async (newMessage) => {
+        const response = await assistantReply(newMessage);
+        addResponseMessage(response.data.output.generic[0].text);
     };
 
     return (

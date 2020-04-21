@@ -21,5 +21,4 @@ export const NavigationHeader = () => (
                 </LiItem>
             </LinkList>
     </HeaderContainer>
-
 );

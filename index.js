@@ -1,19 +1,29 @@
-const http = require("http");
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+const app = express();
+const cors = require("cors");
 
-// Port Environment variable
-const PORT = process.env.PORT || 5000;
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use('/api/ibm', require('./routes/ibm'));
 
-// Creating the node server
-const SERVER = http.createServer();
 
-// Firing up the server on selected port
-SERVER.listen(PORT);
+// Serve static assets if in production
+if (process.env.NODE_ENV === "production") {
+    console.log('We are prod');
+    // Set static folder
+    app.use(express.static("client/build"));
 
-SERVER.on("listening", () => {
-    console.log("[Server]::LISTEN:%s", PORT);
-});
+    // index.html for all page routes
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+}
 
-// Callback function for checking connecting or error
-SERVER.on("error", error => {
-    throw new Error(`[Server]::ERROR:${error.message}`);
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
+    console.log(`Server Running at ${port}`)
 });
