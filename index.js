@@ -1,19 +1,15 @@
-const http = require("http");
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+const cors = require("cors");
 
-// Port Environment variable
-const PORT = process.env.PORT || 5000;
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use('/api/ibm', require('./routes/ibm'));
 
-// Creating the node server
-const SERVER = http.createServer();
+const port = process.env.PORT || 5000;
 
-// Firing up the server on selected port
-SERVER.listen(PORT);
-
-SERVER.on("listening", () => {
-    console.log("[Server]::LISTEN:%s", PORT);
-});
-
-// Callback function for checking connecting or error
-SERVER.on("error", error => {
-    throw new Error(`[Server]::ERROR:${error.message}`);
+app.listen(port, () => {
+    console.log(`Server Running at ${port}`)
 });
