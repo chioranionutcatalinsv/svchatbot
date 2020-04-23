@@ -6,9 +6,18 @@ import {Robot} from '@styled-icons/remix-line/Robot';
 import {Health} from '@styled-icons/boxicons-regular/Health';
 import {InfoLargeOutline} from '@styled-icons/typicons/InfoLargeOutline';
 import svCogLogo from "../assets/logos/svCog.png";
-import chatbotLogo from "../assets/logos/botsv.svg";
+import smiles from "../assets/logos/smileys.svg";
 import {Jumbotron} from 'react-bootstrap';
 
+//DEFS STYLE
+const Z_INDEX_HEADER = 1;
+const Z_INDEX_CHAT = Z_INDEX_HEADER + 1;
+const Z_INDEX_MODAL = Z_INDEX_CHAT + 1;
+
+export const MEDIUM_RANGE = ['40.0625em', '64em'];
+export const MEDIUM_UP = `only screen and (min-width:${MEDIUM_RANGE[0]})`;
+
+//STYLING FUNCTIONS
 export const mapPropsToFontSize = (props) => {
   if(props.fontSize){
       return `${props.fontSize}`
@@ -28,6 +37,7 @@ const mapPropsToColor = (props) => {
     return '#0E0302'
 };
 
+//STYLED COMPONENTS AND STYLES
 export const CoolJumbotron = styled(Jumbotron)`
   font-size: inherit;
   font-family: inherit;
@@ -101,12 +111,13 @@ export const TalkToMeTextSignature = styled.p`
 export const BotLogo = styled.div`
     display:flex;
     align-items: center;
-    background-image: url(${chatbotLogo});
+    background-image: url(${smiles});
 	background-position:left;
 	background-repeat:no-repeat;
 	background-size: contain;
-    width: 70px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
+    margin:5px;
 `;
 
 export const AiRobotIcon = styled(Robot)`
@@ -178,7 +189,7 @@ export const LinkList = styled.ul`
 
 export const HeaderContainer = styled.header`
   display:flex;
-  z-index: 999999;
+  z-index: ${Z_INDEX_HEADER};
   flex-direction: row;
   justify-content: space-around;   /* first 3 lines 2 split right side and left side of header */
   position:fixed;
@@ -223,8 +234,8 @@ export const ModalStyledHook = styled.div`
   padding: 10px;
   position:fixed;
   background: white;
-  width: 60%;
-  z-index: 999999999999;
+  width: 49%;
+  z-index: ${Z_INDEX_MODAL};;
   height: fit-content;
   top:50%;
   left:50%;
@@ -245,6 +256,14 @@ export const ChatWrapperStyleHook = styled.div`
     }
     .rcw-header {
         background-color: #B378EF;
+    }
+    .}
+    .rcw-widget-container{
+        z-index: ${Z_INDEX_CHAT};
+        
+         @media ${MEDIUM_UP} {
+            max-width: 535px;
+        }
     }
     .rcw-launcher {
         height: 80px;
