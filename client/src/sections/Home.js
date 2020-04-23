@@ -9,23 +9,16 @@ import {
     HealthIcon,
     InfoIcon,
     ChatWrapperStyleHook,
+    rowStyle,
 } from '../components/styled';
 import {Button} from "../components/Button";
 import {Modal} from "../components/Modal"
-/*import { ChatFeed, Message } from 'react-chat-ui'*/
+/*import { ChatFeed, Message } from 'react-chat-ui'*/ //maybe use this in the future if better then the react-chat-widget package
 import {Row, Col, Container} from 'react-bootstrap';
 import botSvgIcon from '../assets/logos/botLogo.svg';
 import { Widget, addResponseMessage, setQuickButtons} from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 import axios from 'axios';
-
-const rowStyle = {
-    borderRadius: '12px',
-    border: '1px',
-    padding: '25px',
-    borderStyle: 'solid',
-    marginBottom: '5px',
-};
 
 export const assistantReply = async (text) => {
     return axios.post(window.location.origin + `/api/ibm/textQuery/${text}`);
@@ -40,22 +33,13 @@ const presentationParagraphs = [
     'Another feature of the application is to help users to cope with the stress or anxieties during the isolation and help them relax since this situation can cause serious damage to your mental inner health.'
 ];
 
-const contentModal = (
-    <ul>
-        {presentationParagraphs.map((p, index) =>
-            <li key={index}>
-                {p}
-            </li>
-        )}
-    </ul>);
-
 export const Home = () => {
 
     const [showModal, setShowModal] = useState(false);
 
 
     useEffect(() => {
-        addResponseMessage('Hello there!');
+        addResponseMessage('Hey!');
     }, []);
 
 
@@ -67,6 +51,7 @@ export const Home = () => {
     const handleNewUserMessage = async (newMessage) => {
         let response = await assistantReply(newMessage);
 
+        //future backend response this is how it should look for quickReplies
        /* response = {
             data: {
                 output: {
@@ -93,13 +78,19 @@ export const Home = () => {
     return (
         <Fragment>
             <NavigationHeader />
-            <Modal hide={() => setShowModal(!showModal)} title={'What we can offer:'} isShowing={showModal} children={contentModal}/>
+            <Modal hide={() => setShowModal(!showModal)} title={'What we can offer:'} isShowing={showModal} children={<ul>
+                {presentationParagraphs.map((p, index) =>
+                    <li key={index}>
+                        {p}
+                    </li>
+                )}
+            </ul>}/>
             <Content>
                 <Container>
                     <CoolJumbotron>
                         <div className="container text-center">
                             <Button color={'purple'} onClick={() => setShowModal(!showModal)}>
-                                Talk2Me Presentation
+                                {'Talk2Me Presentation'}
                             </Button>
                             <br/>
                             <br/>

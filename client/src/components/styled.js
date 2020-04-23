@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {NavLink} from "react-router-dom";
 import {GithubSquare} from '@styled-icons/fa-brands/GithubSquare';
 import {Chat} from '@styled-icons/entypo/Chat'
-import {Robot} from '@styled-icons/remix-line/Robot';
 import {Health} from '@styled-icons/boxicons-regular/Health';
 import {InfoLargeOutline} from '@styled-icons/typicons/InfoLargeOutline';
 import svCogLogo from "../assets/logos/svCog.png";
@@ -38,6 +37,14 @@ const mapPropsToColor = (props) => {
 };
 
 //STYLED COMPONENTS AND STYLES
+export const rowStyle = {
+    borderRadius: '12px',
+    border: '1px',
+    padding: '25px',
+    borderStyle: 'solid',
+    marginBottom: '5px',
+};
+
 export const CoolJumbotron = styled(Jumbotron)`
   font-size: inherit;
   font-family: inherit;
@@ -118,12 +125,6 @@ export const BotLogo = styled.div`
     width: 50px;
     height: 50px;
     margin:5px;
-`;
-
-export const AiRobotIcon = styled(Robot)`
-    color: black;
-    height: 60px;
-    weight: 60px;
 `;
 
 export const InfoIcon = styled(InfoLargeOutline)`
