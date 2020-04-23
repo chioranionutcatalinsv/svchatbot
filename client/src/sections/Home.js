@@ -15,7 +15,7 @@ import {Modal} from "../components/Modal"
 /*import { ChatFeed, Message } from 'react-chat-ui'*/
 import {Row, Col, Container} from 'react-bootstrap';
 import botSvgIcon from '../assets/logos/botLogo.svg';
-import { Widget, addResponseMessage} from 'react-chat-widget';
+import { Widget, addResponseMessage, setQuickButtons} from 'react-chat-widget';
 import 'react-chat-widget/lib/styles.css';
 import axios from 'axios';
 
@@ -53,13 +53,41 @@ export const Home = () => {
 
     const [showModal, setShowModal] = useState(false);
 
+
     useEffect(() => {
         addResponseMessage('Hello there!');
     }, []);
 
-    const handleNewUserMessage = async (newMessage) => {
-        const response = await assistantReply(newMessage);
+
+    const handleQuickButtonClicked = async (quickReply) => {
+        let response = await assistantReply(quickReply);
         addResponseMessage(response.data.output.generic[0].text);
+    };
+
+    const handleNewUserMessage = async (newMessage) => {
+        let response = await assistantReply(newMessage);
+
+       /* response = {
+            data: {
+                output: {
+                    quickReplies: ['Fever','Fatigue', 'Muscle pain'], //add quick replies node to response api from backend or ibm cloud
+                    generic: [{
+                        response_type: 'text', text: 'Do you have any of this synonyms?',
+                    }]
+                }
+            }
+        };*/
+
+        addResponseMessage(response.data.output.generic[0].text);
+
+        if(response.data.output.quickReplies && response.data.output.quickReplies.length > 0) {
+
+            const decisionButtons = response.data.output.quickReplies.map(reply => (
+                {value: reply, label: reply, onQuickButtonClicked: reply}
+            ));
+
+            setQuickButtons(decisionButtons);
+        }
     };
 
     return (
@@ -112,10 +140,11 @@ export const Home = () => {
                 </Container>
                 <ChatWrapperStyleHook>
                     <Widget
+                        handleQuickButtonClicked={handleQuickButtonClicked}
                         handleNewUserMessage={handleNewUserMessage}
                         profileAvatar={botSvgIcon}
                         title="Talk2Me"
-                        subtitle="Health assistant"
+                        subtitle="Your friendly companion"
                     />
                 </ChatWrapperStyleHook>
             </Content>
