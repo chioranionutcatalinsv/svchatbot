@@ -19,3 +19,5 @@
     2. yarn install in root and client folder to add node modules
     
     3. yarn dev command to run the project on localhost
+    
+# Go to docs for more info
