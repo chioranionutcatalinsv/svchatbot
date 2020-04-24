@@ -1,11 +1,7 @@
 # Svchatbot Description
-  **Description**
   Our goal is to provide a digital solution that helps people and institutions or organizations to spread information and answer people’s questions about their wellness, physical and mental health and why not offer them additional support since the isolation can cause anxiety or depression.
-  
 
 # Stack and Arhitecture
-   **React/Nodejs**
-   
    Talk2Me is a web app that uses ReactJs as frontend framework and for the backend we use NodeJs. All packed up and integrated with the IBM Watson assistant.
 
 # Team Members
