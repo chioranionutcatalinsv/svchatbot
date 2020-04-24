@@ -21,6 +21,6 @@
     3. yarn dev command to run the project on localhost
     
 # Roadmap and presentation
-https://github.com/chioranionutcatalinsv/svchatbot/blob/master/client/roadmap/roadmap.pdf
-https://youtu.be/ZBsYtygUGi0
+    - https://github.com/chioranionutcatalinsv/svchatbot/blob/master/client/roadmap/roadmap.pdf
+    - 2https://youtu.be/ZBsYtygUGi0
 
